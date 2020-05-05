@@ -5,6 +5,6 @@ This project is an attempt to create a portable, in-device homepage, contained i
 
 ![ureddithome preview](https://raw.githubusercontent.com/khromalabs/ureddithome/master/preview.png)
 
-Is a very simple project, but very useful to me. Hope you like it as well.
+Is a very simple project, but very useful to me. Hope you like it as well. Favourite subreddits can be stored in a bookmark f.e.
 
 [Try it now!](https://khromalabs.github.io/ureddithome/ureddithome.html)
