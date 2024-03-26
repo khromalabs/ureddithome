@@ -8,7 +8,7 @@
     <body>
 <script>
     var default_reddits = [
-        "aww", "news", "worldnews", "politics", "technology"
+        "news", "worldnews", "politics", "technology"
     ];
 </script>
 <style>
@@ -124,6 +124,64 @@ div#range-input {
     font-size: small;
     color: grey;
 }
+
+div#news_peek li a {
+    list-style: none;
+    text-decoration: none;
+    color: #555;
+} 
+
+div#news_peek li {
+    list-style: none;
+    margin-bottom: 5px;
+    background-color: #efefef;
+    padding: 5px;
+    border-radius: 5px;
+} 
+
+div#news_peek li:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+div#news_peek {
+    margin-top: 40px;
+    font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+}
+
+div#news_peek ul {
+    position: relative;
+}
+
+    
+div#news_peek ul {
+    padding: 0;
+    margin: 0;
+}
+
+div#news_peek h2 {
+    margin-bottom: 15px;
+}
+
+/*
+div#news_peek li span {
+    float: right;
+    position: absolute;
+    right: 0;
+    margin: 0 10px 0 0;
+}
+
+div#news_peek ul li span:after {
+}
+
+div#news_peek ul li:hover span:after {
+    content: "→";
+    font-size: 30px;
+    margin: 0;
+    line-height: 25px;
+    opacity: 0.1;
+}
+*/
 </style>
         <div class="container">
             <form class="form">
@@ -134,35 +192,48 @@ div#range-input {
                 </div>
                 <h2>View</h2>
                 <div class="switch-field">
-                    <input type="radio" id="radio-21" name="view" value="top" onclick="checkShowRange(true)" checked/><label for="radio-21">Top</label><input type="radio" id="radio-22" name="view" value="new" onclick="checkShowRange(false)" /><label for="radio-22">New</label><input type="radio" id="radio-23" name="view" value="hot" onclick="checkShowRange(false)" /><label for="radio-23">Hot</label><input type="radio" id="radio-24" name="view" value="rising" onclick="checkShowRange(false)" /><label for="radio-24">Rising</label>
+                    <input type="radio" id="radio-21" name="view" value="top" onclick="checkShowRange(true)" checked/><label for="radio-21">Top</label>
+                    <input type="radio" id="radio-22" name="view" value="new" onclick="checkShowRange(false)" /><label for="radio-22">New</label>
+                    <input type="radio" id="radio-23" name="view" value="hot" onclick="checkShowRange(false)" /><label for="radio-23">Hot</label>
+                    <input type="radio" id="radio-24" name="view" value="rising" onclick="checkShowRange(false)" /><label for="radio-24">Rising</label>
                 </div>
                 <div id="range-input" class="switch-field">
-                    <input type="radio" id="radio-31" name="range" value="day" checked/><label for="radio-31">Today</label><input type="radio" id="radio-32" name="range" value="week" /><label for="radio-32">Week</label><input type="radio" id="radio-33" name="range" value="month" /><label for="radio-33">Month</label><input type="radio" id="radio-34" name="range" value="year" /><label for="radio-34">Year</label><input type="radio" id="radio-35" name="range" value="all" /><label for="radio-35">All&nbsp;Time</label>
+                    <input type="radio" id="radio-31" name="range" value="day" checked/><label for="radio-31">Today</label>
+                    <input type="radio" id="radio-32" name="range" value="week" /><label for="radio-32">Week</label>
+                    <input type="radio" id="radio-33" name="range" value="month" /><label for="radio-33">Month</label>
+                    <input type="radio" id="radio-34" name="range" value="year" /><label for="radio-34">Year</label>
+                    <input type="radio" id="radio-35" name="range" value="all" /><label for="radio-35">All&nbsp;Time</label>
                 </div>
+                <input class="btn" type="button" value="Peek" onclick="peekSubreddit()"/>
                 <input class="btn" type="button" value="Go!" onclick="openReddit()"/>
+                <div id="news_peek">
+                </div>
             </form>
 <script>
-    (function(){
-        // fills subredits
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        try {
-            var ss = url.searchParams.get("s").split(",");
-        } catch(e) {
-            var ss = default_reddits;
-            document.getElementById("customize-tip").innerHTML = "Customize the desired reddits just adding a 's' parameter to the URL, like '?s=subreddit1,subreddit2'";
+    (
+        function(){
+            // fills subredits
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            try {
+                var ss = url.searchParams.get("s").split(",");
+            } catch(e) {
+                var ss = default_reddits;
+                document.getElementById("customize-tip").innerHTML = "Customize the desired reddits just adding a 's' parameter to the URL, like '?s=subreddit1,subreddit2'";
+            }
+            ss.sort();
+            var out = "";
+            for (var i = 0; i < ss.length; i++) {
+                var checked = (i == 0) ? " checked" : "";
+                out += "<input type=\"radio\" id=\"radio-1" + i +
+                    "\" name=\"subreddit\" value=\"" + ss[i] + "\"" +
+                    checked + "/><label for=\"radio-1" + i + "\">" +
+                    ss[i] + "</label>";
+            }
+            document.getElementById("subreddit").innerHTML = out;
         }
-        ss.sort();
-        var out = "";
-        for (var i = 0; i < ss.length; i++) {
-            var checked = (i == 0) ? " checked" : "";
-            out += "<input type=\"radio\" id=\"radio-1" + i +
-                "\" name=\"subreddit\" value=\"" + ss[i] + "\"" +
-                checked + "/><label for=\"radio-1" + i + "\">" +
-                ss[i] + "</label>";
-        }
-        document.getElementById("subreddit").innerHTML = out;
-    })();
+    )();
+
     function openReddit() {
         var subreddit = document.querySelector('input[name="subreddit"]:checked').value;
         var view = document.querySelector('input[name="view"]:checked').value;
@@ -190,6 +261,110 @@ div#range-input {
             "list-item" :
             "none";
     }
-</script>
-    </body>
+
+    function peekSubreddit() {
+        const allowedTypes = ['new', 'top', 'hot', 'rising'];
+        const allowedRanges = ['day', 'week', 'month', 'year', 'all'];
+        var subreddit = document.querySelector('input[name="subreddit"]:checked').value;
+        var view = document.querySelector('input[name="view"]:checked').value;
+        var range = document.querySelector('input[name="range"]:checked').value;
+
+        if (!allowedTypes.includes(view)) {
+            console.error('Invalid listing type');
+            return;
+        }
+        if (!allowedRanges.includes(range)) {
+            console.error('Invalid listing range');
+            return;
+        }
+
+        var url = `https://www.reddit.com/r/${subreddit}/${view}.json`;
+
+        if (view === 'top') {
+            url += `?t=${range}`;
+        }
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the JSON response
+            })
+            .then(data => {
+                var news = [];
+                data.data.children.forEach(post => {
+                    console.log(post.data);
+                    var postTitle = "[↕" + post.data.score + "] " + post.data.title;
+                    var postUrl = `https://reddit.com${post.data.permalink}`;
+                    postTitleAdd = "";
+                    if (post.data.selftext != "") {
+                        postTitleAdd += "[txt]";
+                    }
+                    if (post.data.thumbnail && post.data.thumbnail != "self") {
+                        postTitleAdd += "[img]";
+                    }
+                    if (postTitleAdd) {
+                        postTitle += " " + postTitleAdd;
+                    }
+                    news.push({ title: post.data.selftext, url: postUrl, text: postTitle });
+                });
+
+                var div = document.getElementById("news_peek");
+                while(div.firstChild){
+                    div.removeChild(div.firstChild);
+                }
+
+                if (!news.length) {
+                    document.getElementById("news_peek").innerHTML = "No news available for /r/" + subreddit; 
+                    return;
+                }
+
+                var list = document.createElement('ul');
+                for (var i = 0; i < news.length; i++) {
+                    var item = document.createElement('li');
+                    item.title = news[i].title; 
+                    var a = document.createElement('a');
+                    a.appendChild(document.createTextNode(news[i].text));
+                    a.href = news[i].url;
+                    a.target = "_blank";
+                    var s = document.createElement('span');
+                    item.appendChild(a);
+                    item.appendChild(s);
+                    list.appendChild(item);
+                }
+
+                var h2 = document.createElement('h2');
+                viewtxt = view == "top" ? view + " " + ( range == "day" ? "today" : range ) : view;
+                h2.appendChild(document.createTextNode("/r/" + subreddit + " " + viewtxt))
+                document.getElementById("news_peek").appendChild(h2);
+                document.getElementById("news_peek").appendChild(list);
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+    }
+
+    const myElement = document.getElementById('news_peek');
+
+    let timerId = null;
+    const tapholdThreshold = 500;
+
+    myElement.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        timerId = setTimeout(() => {
+            console.log('Taphold detected');
+        }, tapholdThreshold);
+    });
+
+    myElement.addEventListener('touchend', function(e) {
+        clearTimeout(timerId);
+    });
+
+    myElement.addEventListener('touchmove', function(e) {
+        clearTimeout(timerId);
+    });
+
+    </script>
+</body>
 </html>
