@@ -5,7 +5,7 @@ This project is an attempt to create a portable, in-device homepage, contained i
 
 NOTE: Just added the capability of peeking subreddits content from the Reddit API, which seems to me very cool to do a quick preview.
 
-This is how it looks:
+This is how it looks. Subreddits can be edited in the file itself or passed as the s parameter:
 
 ![ureddithome preview](https://raw.githubusercontent.com/khromalabs/ureddithome/master/preview.png)
 
