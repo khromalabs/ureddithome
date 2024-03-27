@@ -233,7 +233,7 @@ div#news_peek > h2 {
         <div class="container">
             <form class="form">
                 <span class="title">Micro Reddit Homepage - <a href="http://www.khromalabs.org" target="_blank">By Khromalabs</a></span>
-                <div class="title" id="customize-tip">Customize favourite subredits in the bookmark using the s variable like: ?s=subreddit1,subreddit2</div>
+                <div class="title" id="customize-tip"></div>
                 <h2>Subreddit</h2>
                 <div id="subreddit" class="switch-field">
                 </div>
@@ -268,7 +268,6 @@ div#news_peek > h2 {
                 var ss = default_reddits;
                 document.getElementById("customize-tip").innerHTML = "Customize the desired reddits just adding a 's' parameter to the URL, like '?s=subreddit1,subreddit2'";
             }
-            ss.sort();
             var out = "";
             for (var i = 0; i < ss.length; i++) {
                 var checked = (i == 0) ? " checked" : "";
