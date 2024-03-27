@@ -17,9 +17,8 @@ body {
 }
 .switch-field {
     list-style: none;
-    margin-bottom: 36px;
+    margin-bottom: 30px;
 }
-
 .switch-field input {
     position: absolute !important;
     clip: rect(0, 0, 0, 0);
@@ -27,7 +26,6 @@ body {
     width: 1px;
     border: 0;
 }
-
 .switch-field label {
     background-color: #e4e4e4;
     color: rgba(0, 0, 0, 0.6);
@@ -41,27 +39,22 @@ body {
     display:inline-block;
     margin: 5px 0;
 }
-
 .switch-field label:hover {
     cursor: pointer;
 }
-
 .switch-field input:checked + label {
     background-color: #ff6a33;
 }
-
 .switch-field label:first-of-type {
     border-radius: 4px 0 0 4px;
 }
-
 .switch-field label:last-of-type {
     border-radius: 0 4px 4px 0;
 }
-
 div.container {
-    text-align: center;
+    width: 800px;
+    margin: 0 auto;
 }
-
 .form {
     text-align: left;
     font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
@@ -71,12 +64,10 @@ div.container {
     padding: 16px;
     display: inline-block;
 }
-
 h2 {
     font-size: 18px;
     margin: 5px 0;
 }
-
 .btn {
     font-size: 16px;
     padding: 12px 16px;
@@ -99,15 +90,16 @@ h2 {
     border-radius: 3px;
     border: 0;
 }
-
-.btn:hover, .btn:focus, .btn:active, .btn:active:focus {
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn:active:focus {
     outline: none;
 }
-
-.btn:hover, .btn:active:focus {
+.btn:hover,
+.btn:active:focus {
     background-color: #a0b4ff;
 }
-
 .title {
     color: lightgrey;
     position: relative;
@@ -124,64 +116,64 @@ div#range-input {
     font-size: small;
     color: grey;
 }
-
 div#news_peek li a {
     list-style: none;
-    text-decoration: none;
-    color: #555;
-} 
+    /*    text-deco3ration: none;*/
+    color: #666;
+    width: 98%;
+    display: block;
+    padding: 5px 0 5px 10px;
 
+}
 div#news_peek li {
     list-style: none;
     margin-bottom: 5px;
     background-color: #efefef;
-    padding: 5px;
     border-radius: 5px;
-} 
-
+    /*width: 100%;*/
+}
 div#news_peek li:hover {
     background-color: #f5f5f5;
     cursor: pointer;
 }
-
+div#news_peek li:hover a {
+    color: #999;
+}
 div#news_peek {
     margin-top: 40px;
     font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
 }
-
 div#news_peek ul {
-    position: relative;
+    /*position: relative;*/
+    max-width: 800px;
 }
-
-    
 div#news_peek ul {
     padding: 0;
     margin: 0;
 }
-
 div#news_peek h2 {
     margin-bottom: 15px;
 }
 
-/*
-div#news_peek li span {
-    float: right;
-    position: absolute;
-    right: 0;
-    margin: 0 10px 0 0;
-}
+   /*
+      div#news_peek li span {
+          float: right;
+          position: absolute;
+          right: 0;
+          margin: 0 10px 0 0;
+      }
 
-div#news_peek ul li span:after {
-}
+      div#news_peek ul li span:after {
+      }
 
-div#news_peek ul li:hover span:after {
-    content: "→";
-    font-size: 30px;
-    margin: 0;
-    line-height: 25px;
-    opacity: 0.1;
-}
-*/
+      div#news_peek ul li:hover span:after {
+          content: "→";
+          font-size: 30px;
+          margin: 0;
+          line-height: 25px;
+          opacity: 0.1;
+      }
+    */
 </style>
         <div class="container">
             <form class="form">
@@ -231,7 +223,11 @@ div#news_peek ul li:hover span:after {
                     ss[i] + "</label>";
             }
             document.getElementById("subreddit").innerHTML = out;
+            if (document.querySelector('input[name="view"]:checked').value != "top") {
+                checkShowRange(false);
+            }
         }
+
     )();
 
     function openReddit() {
