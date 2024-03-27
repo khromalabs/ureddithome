@@ -151,6 +151,9 @@ div#news_peek > ul > li {
     background-color: #efefef;
     border-radius: 5px;
     line-height: 36px;
+    position: relative;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 div#news_peek > ul > li > a {
@@ -174,6 +177,9 @@ div#news_peek > ul > li > a:hover {
 
 div#news_peek > ul > li > a:first-of-type {
     float: left;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 div#news_peek > ul > li > a:first-of-type:before {
@@ -186,10 +192,13 @@ div#news_peek > ul > li > a.active:first-of-type:before {
 
 div#news_peek > ul > li > a:last-of-type {
     float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 div#news_peek > ul > li > a:last-of-type:before {
-    content: "🔗";
+    content: "↗";
 }
 
 div#news_peek > ul > li > p {
@@ -203,6 +212,9 @@ div#news_peek > ul > li > p {
     font-size: 14px;
     padding: 10px;
     white-space: pre-wrap;
+    position: relative;
+    left: -49px;
+    width: 111%;
 }
 
 div#news_peek > h2 {
@@ -356,8 +368,7 @@ div#news_peek > h2 {
                     }
                     news.push({ text: post.data.selftext, url: postUrl, title: postTitle });
                 });
-
-                // var news = [ { title: "titulo 1", url: "#", text: "" } , { title: "titulo 2", url: "#", text: "texto 2" } ];
+                // var news = [ { title: "titulo", url: "#", text: "" } , { title: "titulo 2", url: "#", text: "texto 2" } ];
 
                 var div = document.getElementById("news_peek");
                 while(div.firstChild){
