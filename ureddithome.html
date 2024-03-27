@@ -202,6 +202,7 @@ div#news_peek > ul > li > p {
     line-height: 20px;
     font-size: 14px;
     padding: 10px;
+    white-space: pre-wrap;
 }
 
 div#news_peek > h2 {
@@ -214,6 +215,7 @@ div#news_peek > h2 {
 
 .accordion-toggle.disabled {
     color: #afafaf !important;
+    cursor: default !important;
 }
 
 .accordion-toggle.disabled:hover {
@@ -382,7 +384,7 @@ div#news_peek > h2 {
                     li.appendChild(document.createTextNode(news[i].title));
                     let a2 = document.createElement('a');
                     a2.href = news[i].url;
-                    a2.taget = "_blank";
+                    a2.target = "_blank";
                     li.appendChild(a2);
                     let p = document.createElement('p');
                     p.classList.add("accordion-content");
