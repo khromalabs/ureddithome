@@ -213,6 +213,8 @@ div#news_peek > ul > li > p {
     font-size: 14px;
     padding: 10px;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
     position: relative;
     left: -49px;
     width: calc(100% + 74px);
@@ -439,6 +441,7 @@ div#news_peek > h2 {
             buttons[i].classList.remove('active');
         }
         event.target.classList.toggle('active');
+        event.target.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     })
 
 </script>
