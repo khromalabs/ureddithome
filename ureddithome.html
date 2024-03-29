@@ -203,7 +203,7 @@ div#news_peek > ul > li > a:last-of-type:before {
     content: "↗";
 }
 
-div#news_peek > ul > li > p {
+div#news_peek > ul > li > p:last-of-type {
     border-radius: 0 0 5px 5px;
     background-color: #fefef1;
     border: 2px solid #eee;
@@ -219,6 +219,12 @@ div#news_peek > ul > li > p {
     position: relative;
     left: -49px;
     width: calc(100% + 74px);
+}
+
+div#news_peek > ul > li > p:first-of-type {
+    line-height: 22px;
+    margin: 0;
+    padding: 5px 0 10px 0;
 }
 
 div#news_peek > h2 {
@@ -346,7 +352,6 @@ div#news_peek > h2 {
         if (view === 'top') {
             url += `?t=${range}`;
         }
-
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -372,7 +377,7 @@ div#news_peek > h2 {
                     }
                     news.push({ text: post.data.selftext, url: postUrl, title: postTitle });
                 });
-                // var news = [ { title: "titulo", url: "#", text: "" } , { title: "titulo 2", url: "#", text: "texto 2" } ];
+                 //var news = [ { title: "titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo titulo", url: "#", text: "lkjlkjljkjlkjlkj" } , { title: "titulo -2", url: "#", text: "texto 2" } ];
 
                 var div = document.getElementById("news_peek");
                 while(div.firstChild){
@@ -395,16 +400,18 @@ div#news_peek > h2 {
                         a1.classList.add("disabled");
                     }
                     li.appendChild(a1);
-                    li.appendChild(document.createTextNode(news[i].title));
+                    let p1 = document.createElement('p');
+                    p1.appendChild(document.createTextNode(news[i].title));
+                    li.appendChild(p1);
                     let a2 = document.createElement('a');
                     a2.href = news[i].url;
                     a2.target = "_blank";
                     li.appendChild(a2);
-                    let p = document.createElement('p');
-                    p.classList.add("accordion-content");
-                    p.id = "content-" + (i+1);
-                    p.appendChild(document.createTextNode(news[i].text));
-                    li.appendChild(p);
+                    let p2 = document.createElement('p');
+                    p2.classList.add("accordion-content");
+                    p2.id = "content-" + (i+1);
+                    p2.appendChild(document.createTextNode(news[i].text));
+                    li.appendChild(p2);
                     ul.appendChild(li);
                 }
 
