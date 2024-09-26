@@ -311,7 +311,7 @@ div#news_peek > h2 {
         var view = document.querySelector('input[name="view"]:checked').value;
         var range = document.querySelector('input[name="range"]:checked').value;
 
-        var url = "https://www.reddit.com/r/" + subreddit;
+        var url = "https://old.reddit.com/r/" + subreddit;
         switch (view) {
             case 'top':
                 url += "/top/?t=" + range;
@@ -347,7 +347,7 @@ div#news_peek > h2 {
             return;
         }
 
-        var url = `https://www.reddit.com/r/${subreddit}/${view}.json`;
+        var url = `https://old.reddit.com/r/${subreddit}/${view}.json`;
 
         if (view === 'top') {
             url += `?t=${range}`;
@@ -363,7 +363,7 @@ div#news_peek > h2 {
                 var news = [];
                 data.data.children.forEach(post => {
                     var postTitle = "[↕" + post.data.score + "] " + post.data.title;
-                    var postUrl = `https://reddit.com${post.data.permalink}`;
+                    var postUrl = `https://old.reddit.com${post.data.permalink}`;
                     postTitleAdd = "";
                     hasText = false;
                     if (post.data.selftext != "") {
